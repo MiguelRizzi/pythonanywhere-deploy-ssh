@@ -34,7 +34,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Redeploy to PythonAnywhere
-        uses: MiguelRizzi/pythonanywhere-deploy-ssh@v1.0
+        uses: MiguelRizzi/pythonanywhere-deploy-ssh@v1
         with:
           username: ${{ secrets.PA_USERNAME }}
           password: ${{ secrets.PA_PASSWORD }}
