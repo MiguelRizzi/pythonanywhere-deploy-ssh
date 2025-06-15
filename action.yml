@@ -1,0 +1,34 @@
+name: Deploy to PythonAnywhere
+description: Deploy a Django app to PythonAnywhere via SSH using Docker.
+author: MiguelRizzi
+
+branding:
+  icon: upload-cloud
+  color: blue
+
+inputs:
+  username:
+    description: "Your PythonAnywhere username"
+    required: true
+  password:
+    description: "Your PythonAnywhere password"
+    required: true
+  working_directory:
+    description: "Target working directory on PythonAnywhere"
+    required: true
+  venv_directory:
+    description: "Path to the Python virtual environment"
+    required: true
+  wsgi_file:
+    description: "Path to the WSGI file to reload the app"
+    required: true
+
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.username }}
+    - ${{ inputs.password }}
+    - ${{ inputs.working_directory }}
+    - ${{ inputs.venv_directory }}
+    - ${{ inputs.wsgi_file }}
