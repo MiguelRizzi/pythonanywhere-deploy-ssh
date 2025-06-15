@@ -1,15 +1,16 @@
 #!/bin/bash
 set -e
 
-USERNAME=$1
-PASSWORD=$2
-WORKING_DIRECTORY=$3
-VENV_DIRECTORY=$4
-WSGI_FILE=$5
+SSH_HOST=$1
+USERNAME=$2
+PASSWORD=$3
+WORKING_DIRECTORY=$4
+VENV_DIRECTORY=$5
+WSGI_FILE=$6
 
 echo "Connecting to PythonAnywhere server..."
 
-sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no "$USERNAME@ssh.pythonanywhere.com" << EOF
+sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no "$USERNAME@$SSH_HOST" << EOF
   echo "Changing to working directory..."
   cd "$WORKING_DIRECTORY"
   echo "Activating virtual environment..."

@@ -7,6 +7,10 @@ branding:
   color: blue
 
 inputs:
+  ssh_host:
+    description: "SSH host for PythonAnywhere (default: ssh.pythonanywhere.com)"
+    required: false
+    default: "ssh.pythonanywhere.com"
   username:
     description: "Your PythonAnywhere username"
     required: true
@@ -27,6 +31,7 @@ runs:
   using: docker
   image: Dockerfile
   args:
+    - ${{ inputs.ssh_host }}
     - ${{ inputs.username }}
     - ${{ inputs.password }}
     - ${{ inputs.working_directory }}
