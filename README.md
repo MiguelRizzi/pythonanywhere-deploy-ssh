@@ -1,8 +1,16 @@
 # 🚀 PythonAnywhere Redeploy Action
 
-This GitHub Action automates the redeployment of a Django application hosted on **PythonAnywhere** via SSH.
+This GitHub Action automates the redeployment process of a Django application hosted on **PythonAnywhere** using SSH.  
+It simplifies the workflow of pulling the latest code, installing dependencies, running migrations, and restarting the web server with minimal configuration.   
 
-> ⚠️ **Important**: SSH access on PythonAnywhere is **only available for paid accounts**. This action will not work with free accounts.
+
+## ✅ Requirements
+
+Before using this action, make sure that:
+
+- You have a **paid PythonAnywhere account**, as SSH access is only available for paid plans.
+- SSH access is enabled on your PythonAnywhere account.
+- Your Django project is deployed on PythonAnywhere and cloned via Git.
 
 
 ## 📦 What does this action do?
@@ -48,12 +56,12 @@ jobs:
 
 | Name      | Description | Required | Example |
 |-----------|-------------|----------|---------|
-| ssh_host  | Optional SSH host for PythonAnywhere (default: ssh.pythonanywhere.com) | No | ssh.eu.pythonanywhere.com |
-| username  | Your PythonAnywhere username | Yes | miguelrizzi |
-| password  | Your PythonAnywhere password | Yes | password |
-| working_directory  | Target working directory on PythonAnywhere | Yes | /home/username/webapp_name |
-| venv_directory  | Path to the Python virtual environment | Yes | /home/username/webapp_name/.venv |
-| wsgi_file | Path to the WSGI file to reload the app | Yes | /var/www/webapp_name_wsgi.py |
+| `ssh_host`  | Optional SSH host for PythonAnywhere (default: `ssh.pythonanywhere.com`) | No | `ssh.eu.pythonanywhere.com` |
+| `username`  | Your PythonAnywhere username | Yes | `username` |
+| `password`  | Your PythonAnywhere password | Yes | `password` |
+| `working_directory`  | Target working directory on PythonAnywhere | Yes | `/home/username/webapp_name` |
+| `venv_directory`  | Path to the Python virtual environment | Yes | `/home/username/webapp_name/.venv` |
+| `wsgi_file` | Path to the WSGI file to reload the app | Yes | `/var/www/webapp_name_wsgi.py` |
 
 
 ## 🔐 Security
@@ -85,6 +93,9 @@ Main script executed inside the container. It uses `sshpass` to connect to Pytho
 
 - `Dockerfile`  
 Defines a custom Docker image based on `ubuntu`, installs `sshpass`, and copies the required scripts. This ensures the environment has all necessary tools to perform the redeploy process without relying on the host runner.
+
+- `.github/workflows/example.yml`  
+Provides an example of how to use the action in a workflow. You can use it as a template or reference when setting up your own deployment workflow.
 
 
 ## 📝 License
