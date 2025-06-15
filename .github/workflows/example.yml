@@ -1,0 +1,21 @@
+
+name: Deploy to PythonAnywhere
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Redeploy to PythonAnywhere
+        uses: MiguelRizzi/pythonanywhere-deploy-ssh@v1
+        with:
+          username: ${{ secrets.PA_USERNAME }}
+          password: ${{ secrets.PA_PASSWORD }}
+          working_directory: ${{ secrets.PA_WORKING_DIRECTORY }}
+          venv_directory: ${{ secrets.PA_VENV_DIRECTORY }}
+          wsgi_file: /var/www/webapp_name_wsgi.py
