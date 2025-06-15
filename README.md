@@ -34,8 +34,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Redeploy to PythonAnywhere
-        uses: MiguelRizzi/pythonanywhere-deploy-ssh@v1
+        uses: MiguelRizzi/pythonanywhere-deploy-ssh@v1.0.0
         with:
+          ssh_host: ssh.eu.pythonanywhere.com # Optional - defaults to ssh.pythonanywhere.com
           username: ${{ secrets.PA_USERNAME }}
           password: ${{ secrets.PA_PASSWORD }}
           working_directory: ${{ secrets.PA_WORKING_DIRECTORY }}
@@ -47,11 +48,12 @@ jobs:
 
 | Name      | Description | Required | Example |
 |-----------|-------------|----------|---------|
-| username  | Your PythonAnywhere username | ✅ | miguelrizzi |
-| password  | Your PythonAnywhere password | ✅ | password |
-| working_directory  | Target working directory on PythonAnywhere | ✅ | /home/username/webapp_name |
-| venv_directory  | Path to the Python virtual environment | ✅ | /home/username/webapp_name/.venv |
-| wsgi_file | Path to the WSGI file to reload the app | ✅ | /var/www/webapp_name_wsgi.py |
+| ssh_host  | Optional SSH host for PythonAnywhere (default: ssh.pythonanywhere.com) | No | ssh.eu.pythonanywhere.com |
+| username  | Your PythonAnywhere username | Yes | miguelrizzi |
+| password  | Your PythonAnywhere password | Yes | password |
+| working_directory  | Target working directory on PythonAnywhere | Yes | /home/username/webapp_name |
+| venv_directory  | Path to the Python virtual environment | Yes | /home/username/webapp_name/.venv |
+| wsgi_file | Path to the WSGI file to reload the app | Yes | /var/www/webapp_name_wsgi.py |
 
 
 ## 🔐 Security
