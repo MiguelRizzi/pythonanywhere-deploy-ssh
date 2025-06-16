@@ -1,4 +1,4 @@
-name: Deploy to PythonAnywhere
+name: Redeploy to PythonAnywhere
 
 on:
   workflow_dispatch:
@@ -13,9 +13,23 @@ jobs:
       - name: Redeploy to PythonAnywhere
         uses: MiguelRizzi/pythonanywhere-deploy-ssh@v1.0.0
         with:
-          ssh_host: ssh.eu.pythonanywhere.com # Optional - defaults to ssh.pythonanywhere.com
-          username: ${{ secrets.PA_USERNAME }} # Your PythonAnywhere username
-          password: ${{ secrets.PA_PASSWORD }} # Your PythonAnywhere password
-          working_directory: ${{ secrets.PA_WORKING_DIRECTORY }} # Target working directory on PythonAnywhere
-          venv_directory: ${{ secrets.PA_VENV_DIRECTORY }} # Path to your virtual environment
-          wsgi_file: /var/www/webapp_name_wsgi.py # Path to your WSGI file
+          # Optional: specify the SSH host (defaults to ssh.pythonanywhere.com)
+          # ssh_host: ssh.eu.pythonanywhere.com
+
+          # Required: your PythonAnywhere username
+          username: ${{ secrets.PA_USERNAME }}
+
+          # Required (if no ssh_private_key): your PythonAnywhere password
+          # password: ${{ secrets.PA_PASSWORD }}
+
+          # Required (if no password): SSH private key
+          ssh_private_key: ${{ secrets.PA_SSH_PRIVATE_KEY }}
+
+          # Required: target working directory on PythonAnywhere
+          working_directory: ${{ secrets.PA_WORKING_DIRECTORY }}
+
+          # Required: path to your virtual environment
+          venv_directory: ${{ secrets.PA_VENV_DIRECTORY }}
+
+          # Required: path to your WSGI file
+          wsgi_file: /var/www/webapp_name_wsgi.py
