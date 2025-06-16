@@ -1,5 +1,5 @@
-name: Deploy to PythonAnywhere
-description: Deploy a Django app to PythonAnywhere via SSH using Docker.
+name: PythonAnywhere Redeploy Action
+description: Redeploy a Django app to PythonAnywhere via SSH using Docker.
 author: MiguelRizzi
 
 branding:
