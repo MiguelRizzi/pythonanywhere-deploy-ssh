@@ -15,8 +15,11 @@ inputs:
     description: "Your PythonAnywhere username"
     required: true
   password:
-    description: "Your PythonAnywhere password"
-    required: true
+    description: "Your PythonAnywhere password (required if no ssh_private_key)"
+    required: false
+  ssh_private_key:
+    description: "SSH private key for authentication (required if no password)"
+    required: false
   working_directory:
     description: "Target working directory on PythonAnywhere"
     required: true
@@ -34,6 +37,7 @@ runs:
     - ${{ inputs.ssh_host }}
     - ${{ inputs.username }}
     - ${{ inputs.password }}
+    - ${{ inputs.ssh_private_key }}
     - ${{ inputs.working_directory }}
     - ${{ inputs.venv_directory }}
     - ${{ inputs.wsgi_file }}
