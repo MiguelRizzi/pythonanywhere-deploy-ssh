@@ -45,7 +45,7 @@ else
   echo "📦 requirements.txt not changed, skipping pip install."
 fi
 
-if echo "$CHANGED_FILES" | grep -E -q '/[^/]*static[^/]*/'; then
+if echo "$CHANGED_FILES" | grep -E -q '.*static.*'; then
   echo "🗂️ Static-like files changed, collecting static files..."
   python manage.py collectstatic --noinput
 else
