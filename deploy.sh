@@ -29,8 +29,11 @@ source "$VENV_DIRECTORY/bin/activate"
 
 echo "⬇️ Pulling latest changes from main branch..."
 
-git fetch origin main
-CHANGED_FILES=\$(git diff --name-only HEAD..origin/main)
+PREV_HEAD=\$(git rev-parse HEAD)
+git pull origin main
+CHANGED_FILES=\$(git diff --name-only \$PREV_HEAD HEAD)
+echo "Archivos cambiados:"
+echo "\$CHANGED_FILES"
 git pull origin main
 
 echo "$CHANGED_FILES"
