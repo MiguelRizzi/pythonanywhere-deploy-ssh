@@ -33,7 +33,7 @@ git status || echo "No es un repositorio git válido"
 git remote -v
 git branch -a
 git fetch origin main
-CHANGED_FILES=$()
+CHANGED_FILES=\$(git diff --name-only HEAD..origin/main)
 git pull origin main
 
 if echo "$CHANGED_FILES" | grep -q '^requirements.txt$'; then
