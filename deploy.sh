@@ -28,10 +28,7 @@ echo "🐍 Activating virtual environment..."
 source "$VENV_DIRECTORY/bin/activate"
 
 echo "⬇️ Pulling latest changes from main branch..."
-echo "Verificando si es un repositorio git..."
-git status || echo "No es un repositorio git válido"
-git remote -v
-git branch -a
+
 git fetch origin main
 CHANGED_FILES=\$(git diff --name-only HEAD..origin/main)
 git pull origin main
@@ -50,7 +47,7 @@ else
   echo "🗂️ Static-like files not changed, skipping collectstatic."
 fi
 
-if echo "$CHANGED_FILES" | grep -E -q 'migrations/|models\.py$'; then
+if echo "$CHANGED_FILES" | grep -E -q 'migrations/|.*models.*\.py$'; then
   echo "🛠️ Migration files or models.py changed, applying migrations..."
   python manage.py makemigrations
   python manage.py migrate
