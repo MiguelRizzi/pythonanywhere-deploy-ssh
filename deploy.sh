@@ -26,16 +26,37 @@ echo "📂 Changing to working directory..."
 cd "$WORKING_DIRECTORY"
 echo "🐍 Activating virtual environment..."
 source "$VENV_DIRECTORY/bin/activate"
+
 echo "⬇️ Pulling latest changes from main branch..."
+git fetch origin main
+CHANGED_FILES=$(git diff --name-only HEAD..origin/main)
 git pull origin main
-echo "📦 nstalling dependencies..."
-pip install -r requirements.txt
-echo "🗂️ Collecting static files..."
-python manage.py collectstatic --noinput
-echo "🛠️ Applying migrations..."
-python manage.py migrate
+
+if echo "$CHANGED_FILES" | grep -q '^requirements.txt$'; then
+  echo "📦 requirements.txt changed, installing dependencies..."
+  pip install -r requirements.txt
+else
+  echo "📦 requirements.txt not changed, skipping pip install."
+fi
+
+if echo "$CHANGED_FILES" | grep -E -q '/[^/]*static[^/]*/'; then
+  echo "🗂️ Static-like files changed, collecting static files..."
+  python manage.py collectstatic --noinput
+else
+  echo "🗂️ Static-like files not changed, skipping collectstatic."
+fi
+
+if echo "$CHANGED_FILES" | grep -E -q 'migrations/|models\.py$'; then
+  echo "🛠️ Migration files or models.py changed, applying migrations..."
+  python manage.py makemigrations
+  python manage.py migrate
+else
+  echo "🛠️ No migration or models.py changes, skipping migrate."
+fi
+
 echo "🔄 Touching WSGI file to restart server..."
 touch "$WSGI_FILE"
+
 echo "✅ Deployment completed successfully!"
 EOF
 )
