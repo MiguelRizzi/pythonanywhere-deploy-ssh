@@ -44,13 +44,17 @@ if echo "$CHANGED_FILES" | grep -q '^requirements.txt$'; then
 else
   echo "📦 requirements.txt not changed, skipping pip install."
 fi
-
+echo "🔍 Checking for static-like files changes..."
+echo "$CHANGED_FILES" | grep -E -q '.*static.*'
+echo "Archivos estáticos cambiados:"
+echo "$CHANGED_FILES" | grep -E -q 'static'
 if echo "$CHANGED_FILES" | grep -E -q '.*static.*'; then
   echo "🗂️ Static-like files changed, collecting static files..."
   python manage.py collectstatic --noinput
 else
   echo "🗂️ Static-like files not changed, skipping collectstatic."
 fi
+
 
 if echo "$CHANGED_FILES" | grep -E -q 'migrations/|.*models.*\.py$'; then
   echo "🛠️ Migration files or models.py changed, applying migrations..."
