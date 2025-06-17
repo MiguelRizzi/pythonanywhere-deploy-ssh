@@ -33,6 +33,8 @@ git fetch origin main
 CHANGED_FILES=\$(git diff --name-only HEAD..origin/main)
 git pull origin main
 
+echo "$CHANGED_FILES"
+
 if echo "$CHANGED_FILES" | grep -q '^requirements.txt$'; then
   echo "📦 requirements.txt changed, installing dependencies..."
   pip install -r requirements.txt
