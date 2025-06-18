@@ -29,13 +29,13 @@ source "$VENV_DIRECTORY/bin/activate"
 
 echo "⬇️ Pulling latest changes from main branch..."
 
-# Antes del pull
+# Guarda el commit actual antes del pull
 PREV_COMMIT=$(git rev-parse HEAD)
 
-# Pull
+# Haz el pull
 git pull origin main
 
-# Después del pull
+# Obtén los archivos cambiados entre el commit anterior y el nuevo HEAD
 CHANGED_FILES=$(git diff --name-only $PREV_COMMIT HEAD)
 echo "Archivos cambiados DEBUG>>>>>>>>: $CHANGED_FILES"
 
