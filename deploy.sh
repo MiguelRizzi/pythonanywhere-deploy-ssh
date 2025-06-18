@@ -29,13 +29,15 @@ source "$VENV_DIRECTORY/bin/activate"
 
 echo "⬇️ Pulling latest changes from main branch..."
 
-PREV_HEAD=\$(git rev-parse HEAD)
-git pull origin main
-CHANGED_FILES=$(git diff --name-only HEAD@{1} HEAD)
-echo "Archivos cambiados>>>>>>>>>>>>>>>>: $CHANGED_FILES"
-echo "Archivos cambiados:"
-echo "\$CHANGED_FILES"
+# Antes del pull
+PREV_COMMIT=$(git rev-parse HEAD)
 
+# Pull
+git pull origin main
+
+# Después del pull
+CHANGED_FILES=$(git diff --name-only $PREV_COMMIT HEAD)
+echo "Archivos cambiados DEBUG>>>>>>>>: $CHANGED_FILES"
 
 
 if echo "$CHANGED_FILES" | grep -q '^requirements.txt$'; then
