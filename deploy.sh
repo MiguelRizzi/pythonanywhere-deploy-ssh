@@ -31,12 +31,12 @@ echo "⬇️ Pulling latest changes from main branch..."
 
 PREV_HEAD=\$(git rev-parse HEAD)
 git pull origin main
-CHANGED_FILES=\$(git diff --name-only \$PREV_HEAD HEAD)
+CHANGED_FILES=$(git diff --name-only HEAD@{1} HEAD)
+echo "Archivos cambiados>>>>>>>>>>>>>>>>: $CHANGED_FILES"
 echo "Archivos cambiados:"
 echo "\$CHANGED_FILES"
-git pull origin main
 
-echo "$CHANGED_FILES"
+
 
 if echo "$CHANGED_FILES" | grep -q '^requirements.txt$'; then
   echo "📦 requirements.txt changed, installing dependencies..."
