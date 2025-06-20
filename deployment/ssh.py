@@ -2,7 +2,7 @@ import paramiko
 import tempfile
 
 
-class SSHDeployer:
+class SSHConnector:
     def __init__(self, host, username, password=None, private_key=None):
         self.host = host
         self.username = username

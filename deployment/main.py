@@ -3,6 +3,7 @@ from deployment.ssh import SSHConnector
 from deployment.manager import DeploymentManager
 
 
+import sys
 
 def main():
     if len(sys.argv) != 8:
@@ -11,10 +12,11 @@ def main():
 
     ssh_host, username, password, ssh_key, workdir, venvdir, wsgi = sys.argv[1:]
 
-    # En caso de que no uses password, pásalo vacío: ""
-    # En caso de que no uses ssh_key, pásalo vacío: ""
+    # Convierte cadenas vacías a None
+    password = password if password else None
+    ssh_key = ssh_key if ssh_key else None
 
-    ssh = SSHConnector(ssh_host, username, password if password else None, ssh_key if ssh_key else None)
+    ssh = SSHConnector(ssh_host, username, password, ssh_key)
     ssh.connect()
 
     manager = DeploymentManager(ssh, workdir, venvdir, wsgi)
@@ -23,7 +25,5 @@ def main():
     finally:
         ssh.close()
 
-
-        
 if __name__ == "__main__":
     main()
