@@ -7,4 +7,4 @@ RUN pip install -r requirements.txt
 RUN ls
 
 
-ENTRYPOINT ["python", "deployment/main.py"]
+CMD ["python", "deployment/main.py"]
