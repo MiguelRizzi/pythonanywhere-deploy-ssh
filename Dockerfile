@@ -1,9 +1,8 @@
 FROM python:3.11-slim
 
+WORKDIR /app
 
-COPY deployment /deployment
-COPY requirements.txt /requirements.txt
+COPY . /app/
 RUN pip install -r requirements.txt
-
 
 ENTRYPOINT ["python", "deployment/main.py"]
