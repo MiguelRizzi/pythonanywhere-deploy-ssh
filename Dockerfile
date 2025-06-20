@@ -1,11 +1,10 @@
 FROM python:3.11-slim
 
-# Coincide con el --workdir que usa GitHub Actions
-WORKDIR /github/workspace
 
-# Copiamos todo el contenido del repo en esa ruta
-COPY . .
-
+COPY deployment /deployment
+COPY requirements.txt /requirements.txt
 RUN pip install -r requirements.txt
+RUN ls
+
 
 ENTRYPOINT ["python", "deployment/main.py"]
