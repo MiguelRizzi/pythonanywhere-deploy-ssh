@@ -66,7 +66,7 @@ jobs:
           # Required: path to your WSGI file
           wsgi_file: /var/www/webapp_name_wsgi.py
 ```
--💡 Use `ssh.pythonanywhere.com` for US accounts or `ssh.eu.pythonanywhere.com` for EU-based accounts.  
+> 💡 Use `ssh.pythonanywhere.com` for US accounts or `ssh.eu.pythonanywhere.com` for EU-based accounts.  
 🔐 You must provide **at least one** of the following:  `password` or `ssh_private_key`
 
 
