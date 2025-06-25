@@ -19,6 +19,7 @@ Before using this action, make sure that:
 - Pulls the latest code from the `main` branch  
 - Installs Python dependencies with `pip`  
 - Runs `collectstatic` and `migrate`  
+- Runs tests
 - Restarts the web server by touching the `WSGI` file
 
 
