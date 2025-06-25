@@ -1,9 +1,12 @@
-FROM ubuntu:22.04
+FROM python:3.11-slim
 
-RUN apt-get update && \
-    apt-get install -y openssh-client sshpass git python3 python3-pip
+WORKDIR /app
+ENV PYTHONPATH="/app"
 
-COPY deploy.sh /deploy.sh
-RUN chmod +x /deploy.sh
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-ENTRYPOINT ["/deploy.sh"]
+COPY deploy/ ./deploy/
+
+CMD ["python", "-m", "deploy.main"]
+

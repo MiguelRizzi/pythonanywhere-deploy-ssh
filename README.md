@@ -19,6 +19,7 @@ Before using this action, make sure that:
 - Pulls the latest code from the `main` branch  
 - Installs Python dependencies with `pip`  
 - Runs `collectstatic` and `migrate`  
+- Runs tests
 - Restarts the web server by touching the `WSGI` file
 
 
@@ -65,7 +66,7 @@ jobs:
           # Required: path to your WSGI file
           wsgi_file: /var/www/webapp_name_wsgi.py
 ```
--💡 Use `ssh.pythonanywhere.com` for US accounts or `ssh.eu.pythonanywhere.com` for EU-based accounts.  
+> 💡 Use `ssh.pythonanywhere.com` for US accounts or `ssh.eu.pythonanywhere.com` for EU-based accounts.  
 🔐 You must provide **at least one** of the following:  `password` or `ssh_private_key`
 
 
